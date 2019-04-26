@@ -1,0 +1,58 @@
+<template>
+<div class="dashboard">
+    <h1  class="subheading grey--text">Dashboard</h1>
+
+    <v-container class="my-5">
+
+        <!--
+            dalam grid layar terdapat 12 kolom untuk melakukan tataletak component
+            search in website vuetify = grid system
+        -->
+        <v-layout row wrap>
+            <!-- gunakan wrap jika ingin menjadi baris baru jika size layar sudah mencapai yang ditentukan pada flex -->
+            <v-flex xs12 md6 >
+                <!--
+                ketika layar berukuran extra small maka akan menjadi 12 kolom dan jika layar berukuran medium maka akan menjadi 6 kolom.
+                artinya, jika layar berukuran medium maka component akan membuat baris baru pada component setelahnya. asal pada layout kita gunakan prop wrap.
+                -->
+                <v-btn outline block class="primary">1</v-btn>
+            </v-flex>
+
+            <v-flex xs4 md2 >
+                <v-btn outline block class="primary">2</v-btn>
+            </v-flex>
+            <v-flex xs4 md2 >
+                <v-btn outline block class="primary">2</v-btn>
+            </v-flex>
+            <v-flex xs4 md2 >
+                <v-btn outline block class="primary">2</v-btn>
+            </v-flex>
+        </v-layout>
+
+        <v-layout row wrap justify-space-around>
+            <!--
+            untuk mengatur posisi jika terdapat ruang kosong pada kolom
+            justify-center
+            justify-space-around
+            justify-space-between
+            justify-end
+            justify-start
+            -->
+            <v-flex xs4 md3>
+                <v-btn outline block color="success">1</v-btn>
+            </v-flex>
+            <v-flex xs4 md3>
+                <v-btn outline block color="success">2</v-btn>
+            </v-flex>
+        </v-layout>
+
+    </v-container>
+
+</div>
+</template>
+
+<script>
+export default {
+
+}
+</script>

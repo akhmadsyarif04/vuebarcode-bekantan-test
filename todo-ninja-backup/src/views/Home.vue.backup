@@ -1,0 +1,58 @@
+<template>
+  <div class="home">
+    <h1>Homepage</h1>
+
+    <!-- bagian text dan color -->
+    <!-- Search pada website resmi vue tentang text, color, font-size -->
+    <!-- <p class="red white--text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+    <p class="pink lighten-4 red--text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+    <h1 class="display-4">Massive Display</h1>
+    <h4 class="display-1">Small Displat</h4>
+    <p class="headline">This is a headline</p>
+    <p class="subheading font-weight-bold">This is a heading</p>
+    <p class="caption">This is a caption</p> -->
+
+    <!-- bagian button dan icons -->
+    <!-- search button -->
+    <v-btn class="pink white--text">Click Me</v-btn>
+    <v-btn depressed color="pink">Click Me</v-btn>
+    <v-btn flat color="pink">Click Me</v-btn>
+
+    <v-btn drepressed class="pink white--text">
+      <v-icon left>email</v-icon> <!-- icon dari material design icon -->
+      <span>email me</span>
+    </v-btn>
+
+    <v-btn drepressed small class="pink white--text">
+      <v-icon left small>email</v-icon> <!-- icon dari material design icon -->
+      <span>email me</span>
+    </v-btn>
+
+    <v-btn drepressed large class="pink white--text">
+      <span>email me</span>
+      <v-icon right large>email</v-icon> <!-- icon dari material design icon -->
+    </v-btn>
+
+    <v-btn fab drepressed small dark color="purple">
+      <v-icon>favorite</v-icon> <!--  icon dari material design icon -->
+    </v-btn>
+
+
+
+    <!-- breakpoint untuk mengatur responsif tampilan -->
+    <!-- visibility -->
+    <!-- <v-btn class="hidden-md-and-down">Click me</v-btn> -->
+    <!-- <v-btn class="hidden-md-and-up">Click me</v-btn> -->
+    <!-- <v-btn class="hidden-sm-only">Click Me</v-btn> -->
+
+
+  </div>
+</template>
+
+<script>
+
+  export default {
+
+  }
+</script>
