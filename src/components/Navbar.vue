@@ -96,6 +96,21 @@ export default {
                     text: 'Team',
                     router: '/team'
                 },
+                {
+                    icon: 'person',
+                    text: 'Barcode',
+                    router: '/barcode'
+                },
+                {
+                    icon: 'person',
+                    text: 'Barcode2',
+                    router: '/barcode2'
+                },
+                {
+                    icon: 'person',
+                    text: 'Barcode3',
+                    router: '/barcode3'
+                },
             ],
             snackbar: false,
         }

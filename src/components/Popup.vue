@@ -11,13 +11,17 @@
         </v-card-title>
         <v-card-text>
             <v-form class="px-3" ref="form">
-                <v-text-field name="name" label="Title" id="id" v-model="title" prepend-icon="folder" :rules="inputRules"></v-text-field>
+              <!-- // Bekantan jantan -->
+                <v-text-field name="name" label="Rule" id="id" v-model="rule" prepend-icon="folder" :rules="inputRules"></v-text-field>
+
+<!-- yang asli -->
+                <!-- <v-text-field name="name" label="Title" id="id" v-model="title" prepend-icon="folder" :rules="inputRules"></v-text-field>
                 <v-textarea label="Information" name="name" v-model="content" prepend-icon="edit" :rules="inputRules"></v-textarea>
 
                 <v-menu>
                     <v-text-field :rules="inputRules" :value="formattedDate" slot="activator" label="Due date" prepend-icon="date_range" id="id"></v-text-field>
                     <v-date-picker v-model="due"   ></v-date-picker>
-                </v-menu>
+                </v-menu> -->
 
                 <!-- untuk jarak  -->
                 <v-spacer></v-spacer>
@@ -39,12 +43,16 @@
 import format from 'date-fns/format'
 // import db firebase
 // @ adalah root pada /src
-import db from '@/fb'
+// import db from '@/fb'
+
+// bekantan jantan
+import axios from 'axios'
 
 export default {
     data() {
         return {
             title: '',
+            rule: '',
             content: '',
             due: null,
             inputRules: [
@@ -57,22 +65,39 @@ export default {
     methods: {
         submit() {
             if(this.$refs.form.validate()){
-                this.loading = true;
+                // this.loading = true;
+                //
+                // const project = {
+                //     title: this.title,
+                //     content: this.content,
+                //     due: format(this.due, 'Do MMM YYYY'),
+                //     person: 'Killua',
+                //     status: 'Ongoing',
+                // }
+                // // insert data ke firebase melalui file fb.js yang di import diatas
+                // db.collection('projects').add(project).then(() => {
+                //     console.log('added to db');
+                //     this.loading = false;
+                //     this.dialog = false;
+                //     this.$emit('projectAdded'); // komunikasi ke file navbar untuk snackbar
+                // })
 
-                const project = {
-                    title: this.title,
-                    content: this.content,
-                    due: format(this.due, 'Do MMM YYYY'),
-                    person: 'Killua',
-                    status: 'Ongoing',
-                }
-                // insert data ke firebase melalui file fb.js yang di import diatas
-                db.collection('projects').add(project).then(() => {
-                    console.log('added to db');
-                    this.loading = false;
-                    this.dialog = false;
-                    this.$emit('projectAdded'); // komunikasi ke file navbar untuk snackbar
-                })
+// Bekantan jantan
+                    let formData = new FormData()
+                    formData.set('rule', this.rule)
+                    console.log(formData)
+                    axios.post('http://localhost:8000/api/v1/rules', formData)
+                    axios.get('http://localhost:8000/api/v1/rules')
+                      .then((response) => {
+                        let rules = response.data.rules
+                        this.rules = rules
+                        console.log(response.data.rules)
+                      })
+                      .catch((error) => {
+                        let responses = error.response
+                        console.log(responses)
+                      })
+
             }
         }
     },

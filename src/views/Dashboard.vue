@@ -4,55 +4,22 @@
 
     <v-container class="my-5">
 
-        <v-layout row class="mb-3">
-            <v-tooltip top>
-                <v-btn small flat color="grey" @click="sortBy('title')" slot="activator">
-                    <v-icon left small>folder</v-icon>
-                    <span class="caption text-lowercase">By Project Name</span>
-                </v-btn>
-                <span>Sort project by project name</span>
-            </v-tooltip>
 
-            <v-tooltip top>
-                <v-btn small flat color="grey" @click="sortBy('person')" slot="activator">
-                    <v-icon left small>person</v-icon>
-                    <span class="caption text-lowercase">By Person</span>
-                </v-btn>
-                <span>Sort projects by person</span>
-            </v-tooltip>
 
-        </v-layout>
-
-        <v-card flat class="pa-3" v-for="project in projects " :key="project.title">
-            <v-layout row wrap :class="` pa-3 project ${project.status}`">
+        <v-card flat class="pa-3" v-for="rule in rules " :key="rule.id">
+            <v-layout row wrap>
                 <v-flex xs12 md6>
                     <div class="caption grey--text">
-                        Projects Title
+                        Rule
                     </div>
                     <div class="">
-                        {{ project.title }}
-                    </div>
-                </v-flex>
-                <v-flex xs6 sm4 md2>
-                    <div class="caption grey--text">
-                        Person
-                    </div>
-                    <div class="">
-                        {{ project.person }}
-                    </div>
-                </v-flex>
-                <v-flex xs6 sm4 md2>
-                    <div class="caption grey--text">
-                        Due By
-                    </div>
-                    <div class="">
-                        {{ project.due }}
+                        {{ rule.rule }}
                     </div>
                 </v-flex>
                 <v-flex xs2 sm4 md2>
                     <div class="right">
                         <!-- right agar posisi menjadi kesebelah kanan -->
-                        <v-chip small :class="`${project.status} white--text caption my-2`"> {{ project.status }}</v-chip>
+                        <v-chip small> {{ rule.rule }}</v-chip>
                     </div>
                 </v-flex>
             </v-layout>
@@ -65,34 +32,50 @@
 </template>
 
 <script>
-import db from '@/fb'
+import axios from 'axios'
 
 export default {
     data() {
         return {
             projects: [],
+            rules: [],
         }
     },
     created() {
-        db.collection('projects').onSnapshot(res => {
-            const changes = res.docChanges();
-
-            changes.forEach(change => {
-                if (change.type === 'added')
-                {
-                        this.projects.push({
-                            ...change.doc.data(),
-
-                        })
-                }
-            })
-        })
+        // db.collection('projects').onSnapshot(res => {
+        //     const changes = res.docChanges();
+        //
+        //     changes.forEach(change => {
+        //         if (change.type === 'added')
+        //         {
+        //                 this.projects.push({
+        //                     ...change.doc.data(),
+        //
+        //                 })
+        //         }
+        //     })
+        // })
+        this.rules_data()
+    },
+    mounted(){
+      this.rules_data()
+    },
+    updated() {
+      this.rules_data()
     },
     methods: {
-        sortBy(prop)
-        {
-            this.projects.sort( (a,b) => a[prop] < b[prop] ? -1 : 1)
-        }
+      rules_data () {
+        axios.get('http://localhost:8000/api/v1/rules')
+          .then((response) => {
+            let rules = response.data.rules
+            this.rules = rules
+            console.log(response.data.rules)
+          })
+          .catch((error) => {
+            let responses = error.response
+            console.log(responses)
+          })
+      }
     }
 }
 </script>
